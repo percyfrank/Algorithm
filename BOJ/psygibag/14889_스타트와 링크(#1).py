@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 
 n = int(input())
 
@@ -5,11 +7,11 @@ arr = []
 for _ in range(n):
     arr.append(list(map(int,input().split())))
 
-result = float('inf')
 tmp = []
+result = float('inf')
 visited = [False] * n
 
-def solve():
+def solve(idx):
     global result
     if len(tmp) == n//2:
         start = 0
@@ -20,16 +22,16 @@ def solve():
                     start += arr[i][j]
                 elif not visited[i] and not visited[j]:
                     link += arr[i][j]
-        result = min(result,abs(start-link))
+        result = min(result, abs(start-link))
         return
 
-    for i in range(n):
+    for i in range(idx,n):
         if not visited[i]:
             visited[i] = True
             tmp.append(i)
-            solve()
+            solve(i+1)
             tmp.pop()
             visited[i] = False
 
-solve()
+solve(0)
 print(result)
