@@ -3,18 +3,9 @@ input = sys.stdin.readline
 
 arr = list(map(int,input().split()))
 
-a_cnt, d_cnt = 0, 0
-for i in range(7):
-    if arr[i+1] == arr[i] + 1:
-        a_cnt += 1
-    elif arr[i+1] == arr[i] - 1:
-        d_cnt += 1
-    else:
-        break
-
-if a_cnt == 7:
+if arr == [1, 2, 3, 4, 5, 6, 7, 8]:
     print("ascending")
-elif d_cnt == 7:
+elif arr == [8, 7, 6, 5, 4, 3, 2, 1]:
     print("descending")
 else:
     print("mixed")
