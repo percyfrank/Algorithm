@@ -3,12 +3,10 @@ input = sys.stdin.readline
 
 n = int(input())
 
-start = 2
-result = []
+result = [0] * 16
+result[0] = 2
 
-for _ in range(15):
-    tmp = start + (start-1)
-    result.append(tmp)
-    start = tmp
+for i in range(1,n+1):
+    result[i] = result[i-1] + (result[i-1] - 1)
 
-print(result[n-1]**2)
+print(result[n]**2)
