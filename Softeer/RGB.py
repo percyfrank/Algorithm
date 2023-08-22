@@ -3,8 +3,6 @@ from collections import deque
 n, m = map(int, input().split())
 arr = [list(input()) for _ in range(n)]
 
-ans = -1
-
 pos = [[] for _ in range(3)]
 for i in range(n):
     for j in range(m):
@@ -16,9 +14,6 @@ for i in range(n):
             pos[2].append((i, j))
         if arr[i][j] != "#":
             arr[i][j] = "."
-
-print(pos)
-print(arr)
 
 def bfs(ex, ey):
     visit = [[-1 for _ in range(m)] for _ in range(n)]
@@ -37,8 +32,8 @@ def bfs(ex, ey):
 
     return visit[ex][ey]
 
-# idx는 RGB 중 어떤 것을 이동시킬 것인가
-# len은 지금까지 이동한 거리의 총 합
+# idx : RGB 중 이동시킬 순서(순서대로 1,2,3)
+# len : 지금까지 이동한 거리의 총 합
 def backtracking(idx, len):
     global ans
 
@@ -48,8 +43,7 @@ def backtracking(idx, len):
         ans = min(ans, len)
         return
 
-    for px, py in pos[idx]: # px, py : 이번에 이동시키고 싶은 위치
-        print(px,py)
+    for px, py in pos[idx]:  # px, py : 이번에 이동시키고 싶은 위치
         dist = bfs(px, py)   # 최단 거리 계산
         if dist == -1:
             continue
@@ -57,5 +51,6 @@ def backtracking(idx, len):
         backtracking(idx+1, len+dist)
         arr[px][py] = '.'
 
+ans = -1
 backtracking(0,0)
 print(ans)
