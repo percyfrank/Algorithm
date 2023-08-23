@@ -54,3 +54,27 @@ def backtracking(idx, len):
 ans = -1
 backtracking(0,0)
 print(ans)
+
+
+'''
+입력 예시
+
+4 4
+....
+#.#.
+#R.#
+#RBG
+
+=> 15
+
+5 6
+...#R.
+##.##R
+R#.#..
+##G#.#
+....GB
+
+=> -1
+
+'''
+
