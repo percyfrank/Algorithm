@@ -15,13 +15,15 @@ class Solution {
     static int[] dy = {1,0,-1,0};
     static int[][] visited;
     static int[] total;
+    static int row;
+    static int col;
     
     public int solution(int[][] land) {
         
-        int row = land.length; 
-        int col = land[0].length;
+        row = land.length; 
+        col = land[0].length;
     
-        total = new int[col]; // 가장 많은 석유량
+        total = new int[col];
         visited = new int[row][col];
         
         for (int i=0; i<row; i++) {            
@@ -31,11 +33,7 @@ class Solution {
                 }              
             }
         }
-        
-        // for (int i=0; i<col; i++) {
-        //     System.out.println(total[i]);
-        // }
-        
+
         return Arrays.stream(total).max().getAsInt();
     }
     
@@ -56,7 +54,7 @@ class Solution {
             for (int i=0; i<4; i++) {
                 int nx = p.x + dx[i];
                 int ny = p.y + dy[i];
-                if(nx<0 || ny<0 || nx>=land.length || ny>=land[0].length) {
+                if(nx<0 || ny<0 || nx>=row || ny>=col) {
                     continue;
                 }
                 if(visited[nx][ny] == 0 && land[nx][ny] == 1) {
