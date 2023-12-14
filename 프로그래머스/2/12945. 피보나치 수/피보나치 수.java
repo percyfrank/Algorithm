@@ -1,7 +1,7 @@
 class Solution {
     public int solution(int n) {
         
-        int[] fibo = new int[100001];
+        int[] fibo = new int[n+1];
         fibo[1] = 1;
         
         for(int i=2; i<=n; i++) {
