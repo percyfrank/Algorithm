@@ -1,8 +1,6 @@
-from collections import deque
-
 def solution(s):
 
-    q = deque()
+    q = []
     for word in s:
         if not q:
             q.append(word)
