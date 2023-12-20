@@ -8,9 +8,4 @@ def solution(brown, yellow):
             b = tot // i
             tmp = 4 + (a-2)*2 + (b-2)*2
             if tmp == brown:
-                answer.append(a)
-                answer.append(b)
-                break
-    
-    answer.sort(reverse=True)
-    return answer
+                return sorted([a,b], reverse=True)
