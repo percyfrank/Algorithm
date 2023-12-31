@@ -7,10 +7,10 @@ def solution(k, tangerine):
         
     answer, cnt = 0,0
     tmp = dict(sorted(tmp.items(), key=lambda x:x[1], reverse=True))
-    for key,value in tmp.items():
-        cnt += value
+    for value in sorted(tmp.values(),reverse=True):
+        k -= value
         answer += 1
-        if cnt >= k:
+        if k <= 0:
             break
 
     return answer
