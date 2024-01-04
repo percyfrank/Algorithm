@@ -1,12 +1,12 @@
 def solution(clothes):
     
-    cnt = dict()
-    for cloth in clothes:
-        cnt.setdefault(cloth[1],0)
-        cnt[cloth[1]] += 1
+    type = dict()
+    for n,t in clothes:
+        type.setdefault(t,0)
+        type[t] += 1
         
     answer = 1
-    for key,value in cnt.items():
+    for value in type.values():
         answer *= (value+1)
     
     return answer-1
