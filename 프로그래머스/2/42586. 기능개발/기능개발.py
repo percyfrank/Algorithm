@@ -8,17 +8,14 @@ def solution(progresses, speeds):
         release.append(ceil(progress / speed))
     
     answer = []
-    tmp = []
-    for data in release:
-        if len(tmp) == 0:
-            tmp.append(data)
-            continue
-        if tmp[0] >= data:
-            tmp.append(data)
-        else:
-            answer.append(len(tmp))
-            tmp.clear()
-            tmp.append(data)
-    answer.append(len(tmp))
+    prev = release[0]
+    cnt = 0
+    for i in range(len(release)):
+        if prev < release[i]:
+            answer.append(cnt)
+            prev = release[i]
+            cnt = 0
+        cnt += 1
+    answer.append(cnt)
     
     return answer
