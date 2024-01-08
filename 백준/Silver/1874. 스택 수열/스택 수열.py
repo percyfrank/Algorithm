@@ -1,17 +1,20 @@
+
+import sys
+input = sys.stdin.readline
 n = int(input())
 
-tmp = []
+stack = []
 answer = []
 num = 1
 
 for _ in range(n):
     target = int(input())
     while num <= target:
-        tmp.append(num)
+        stack.append(num)
         num += 1
         answer.append("+")
-    if tmp[-1] == target:
-        tmp.pop()
+    if stack[-1] == target:
+        stack.pop()
         answer.append("-")
     else:
         print("NO")
