@@ -2,13 +2,21 @@ from collections import deque
 
 def solution(priorities, location):
     
-    queue =  [(i,p) for i,p in enumerate(priorities)]
+    q = deque(priorities)
     answer = 0
-    while True:
-        curr = queue.pop(0)
-        if any(curr[1] < q[1] for q in queue):
-            queue.append(curr)
-        else:
+    targer_loc = location
+    
+    while q:
+        MAX = max(q)
+        curr = q.popleft()
+        targer_loc -= 1
+        if curr < MAX:
+            q.append(curr)
+            if targer_loc < 0:
+                targer_loc = len(q)-1
+        elif curr == MAX:
             answer += 1
-            if curr[0] == location:
+            if targer_loc < 0:
                 return answer
+                
+                
