@@ -17,7 +17,7 @@ def solution(str1, str2):
                 
         return tmp
         
-    word1,word2 = sets(str1.lower()),sets(str2.lower())
+    word1, word2 = sets(str1.lower()),sets(str2.lower())
     A, B = Counter(word1) & Counter(word2), Counter(word1) | Counter(word2)
     cntA, cntB = sum(A.values()), sum(B.values())
     
