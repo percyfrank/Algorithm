@@ -1,15 +1,14 @@
-from math import sqrt
+def isPrime(num):
+    if num < 2:
+        return False
+    for i in range(2,int(num**0.5)+1):
+        if num % i == 0:
+            return False
+    return True
+    
 
 def solution(n, k):
 
-    def isPrime(num):
-        if num < 2:
-            return False
-        for i in range(2,int(sqrt((num)))+1):
-            if num % i == 0:
-                return False
-        return True
-    
     tmp = ""
     while True:
         if n < k:
