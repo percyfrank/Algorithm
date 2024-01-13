@@ -14,17 +14,14 @@ def solution(n, t, m, p):
 
         return tmp[::-1]
 
-    answer = total = ""
-    start = 0
-    while True:
+    total = ""
+    for i in range(t*m):
+        total += makeNum(i)
         if len(total) >= t*m:
-            while t > 0:
-                answer += total[p-1]
-                p += m
-                t -= 1
             break
-        
-        total += makeNum(start)
-        start += 1
+            
+    answer = ""        
+    for i in range(p-1,t*m,m):
+        answer += total[i]
 
     return answer
