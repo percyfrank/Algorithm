@@ -6,12 +6,12 @@ def solution(n, t, m, p):
         
         tmp = ""
         while True:
-            if num < n:
-                tmp += nums[num]
+            q,r = divmod(num,n)
+            tmp += nums[r]
+            num = q
+            if q == 0:
                 break
-            tmp += nums[num % n]
-            num //= n
-            
+
         return tmp[::-1]
 
     answer = total = ""
