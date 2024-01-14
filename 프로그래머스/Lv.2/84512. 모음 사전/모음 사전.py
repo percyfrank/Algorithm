@@ -1,12 +1,17 @@
-from itertools import product
-
 def solution(word):
 
     words = []
-    for i in range(1,6):
-        for data in product("AEIOU",repeat=i):
-            words.append(''.join(data))
-    words.sort()
+    moeum = "AEIOU"
+
+    def dfs(idx,w):
+        if idx == 5:
+            return
+        
+        for i in range(len(moeum)):
+            words.append(w+moeum[i])
+            dfs(idx+1,w+moeum[i])
+                    
+    dfs(0,"")
 
     return words.index(word)+1
     
