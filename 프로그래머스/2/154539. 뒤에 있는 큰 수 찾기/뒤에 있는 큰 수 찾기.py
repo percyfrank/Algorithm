@@ -1,14 +1,11 @@
-from heapq import heappush, heappop
-
 def solution(numbers):
-    
     answer = [-1] * len(numbers)
-    h = []
+    stack_idx = []
     
     for i in range(len(numbers)):
-        while h and h[0][0] < numbers[i]:
-            answer[heappop(h)[1]] = numbers[i]
-    
-        heappush(h,(numbers[i],i))
+        while stack_idx and numbers[stack_idx[-1]] < numbers[i]:
+            answer[stack_idx.pop()] = numbers[i]
         
+        stack_idx.append(i)
+    
     return answer
