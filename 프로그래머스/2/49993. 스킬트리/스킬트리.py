@@ -6,6 +6,8 @@ def solution(skill, skill_trees):
         for st in skill_tree:
             if st in skill:
                 tmp += st
+            if tmp == skill:
+                break
         
         if tmp == skill[0:len(tmp)]:
             answer += 1
