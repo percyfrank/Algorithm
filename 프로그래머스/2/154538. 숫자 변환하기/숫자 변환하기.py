@@ -1,11 +1,18 @@
+from collections import deque
+
 def solution(x, y, n):
-    
-    dp = [float('inf')] * (3*y+1)
-    dp[x] = 0
-    
-    for i in range(x,y+1):
-        dp[i+n] = min(dp[i]+1, dp[i+n])
-        dp[i*2] = min(dp[i]+1, dp[i*2])
-        dp[i*3] = min(dp[i]+1, dp[i*3])
-    
-    return dp[y] if dp[y] != float('inf') else -1
+    visited = [0] * 1000001
+
+    q = deque()
+    q.append((x, 0))
+    visited[x] = 1
+    while q:
+        num, cnt = q.popleft()
+        if num == y:
+            return cnt
+        for next_num in (num + n, num * 2, num * 3):
+            if next_num <= y and not visited[next_num]:
+                visited[next_num] = 1
+                q.append((next_num, cnt + 1))
+
+    return -1
