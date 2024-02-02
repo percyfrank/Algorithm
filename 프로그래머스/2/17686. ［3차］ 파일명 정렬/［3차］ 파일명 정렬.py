@@ -7,10 +7,11 @@ def solution(files):
         for i in range(len(file)):
             if file[i].isdigit():
                 number += file[i]
+                flag = True
                 if len(number) == 5:
                     tail = file[i+1:]
                     break
-                flag = True
+                
             elif not flag:
                 head += file[i]
             else:        
