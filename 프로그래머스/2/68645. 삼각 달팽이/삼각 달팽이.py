@@ -1,23 +1,20 @@
 def solution(n):
-    answer = []
-    array = [[0] * n for _ in range(n)]
-    x, y = -1, 0
-    num = 1
+
+    def is_range(x,y):
+        return x>=0 and y>=0 and x<n and y<n
     
-    for i in range(n): 
-        for _ in range(i, n):
-            if i % 3 == 0: 
-                x += 1
-            elif i % 3 == 1: 
-                y += 1
-            elif i % 3 == 2:
-                x -= 1
-                y -= 1
-            array[x][y] = num
-            num += 1
-            
-    for i in array:
-        for j in i:
-            if j:
-                answer.append(j)
-    return answer
+    arr = [[0 for j in range(1, i+1)] for i in range(1, n+1)]
+    dirs = {0 : (0,1), 1: (1,0), 2: (-1,-1)}
+    x,y,dir = 0,0,1
+    arr[0][0] = 1
+    total = n*(n+1) // 2
+
+    for num in range(2,total+1):
+        nx,ny = x + dirs[dir][0] , y + dirs[dir][1]
+        if not is_range(nx,ny) or arr[nx][ny] != 0:
+            dir = (dir+2) % 3
+        nx,ny = x + dirs[dir][0] , y + dirs[dir][1]
+        arr[nx][ny] = num
+        x,y = nx,ny
+        
+    return sum(arr,[])
