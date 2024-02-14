@@ -1,20 +1,15 @@
 from itertools import combinations
+from collections import Counter
  
 def solution(orders, course):
     
     answer = []
     for c in course:
-        tmp = {}
+        tmp = []
         for order in orders:
-            if len(order) < c:
-                continue
-            for data in combinations(sorted(order),c):
-                tmp.setdefault(''.join(data),0)
-                tmp[''.join(data)] += 1
-
-        if tmp:
-            for key, value in tmp.items():
-                if value == max(tmp.values()) >= 2:
-                    answer.append(key)
+            tmp += combinations(sorted(order),c)
         
-    return sorted(answer)
+        tmp = Counter(tmp).most_common()
+        answer += [key for key,value in tmp if value > 1 and value == tmp[0][1]]
+        
+    return [''.join(data) for data in sorted(answer)]
