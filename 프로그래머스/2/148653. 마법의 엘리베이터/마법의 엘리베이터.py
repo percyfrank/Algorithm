@@ -1,5 +1,5 @@
 def solution(storey):
-    
+
     answer = 0
     while storey > 0:
         storey,r = divmod(storey,10)
