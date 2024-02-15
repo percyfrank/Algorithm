@@ -7,10 +7,11 @@ def solution(book_time):
         end_h,end_m = map(int,time[1].split(":"))
         start = start_h * 60 + start_m
         end = end_h * 60 + end_m + 10
-        for i in range(start,end):
-            visited[i] += 1
-
-    print(visited)
+        visited[start] += 1
+        visited[end] -= 1
+    
+    for i in range(1,1450):
+        visited[i] += visited[i-1]
     
     return max(visited)
                             
