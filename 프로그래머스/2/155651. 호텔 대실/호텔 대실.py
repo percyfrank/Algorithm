@@ -1,17 +1,17 @@
+from heapq import heappop,heappush
+
 def solution(book_time):
-    
-    visited = [0] * 1450
-    
+
+    book_time.sort()
+    for idx,time in enumerate(book_time):
+        start = int(time[0][:2]) * 60 + int(time[0][3:])
+        end = int(time[1][:2]) * 60 + int(time[1][3:]) 
+        book_time[idx] = [start,end+10]
+
+    rooms = []
     for time in book_time:
-        start_h,start_m = map(int,time[0].split(":"))
-        end_h,end_m = map(int,time[1].split(":"))
-        start = start_h * 60 + start_m
-        end = end_h * 60 + end_m + 10
-        visited[start] += 1
-        visited[end] -= 1
-    
-    for i in range(1,1450):
-        visited[i] += visited[i-1]
-    
-    return max(visited)
-                            
+        if len(rooms) != 0 and rooms[0] <= time[0]:
+            heappop(rooms)
+        heappush(rooms,time[1])
+        
+    return len(rooms)
