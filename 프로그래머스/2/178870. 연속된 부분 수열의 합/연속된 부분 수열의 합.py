@@ -1,19 +1,27 @@
 def solution(sequence, k):
-
-    n = len(sequence) 
-    end, subtotal = 0, 0
+    
+    prefix_sum = [0]
+    for i in range(len(sequence)):
+        prefix_sum.append(prefix_sum[-1] + sequence[i])
+    # print(prefix_sum)
+    
     answer = []
-    for start in range(n):
+    for i in range(1,len(sequence)+1):
         
-        while subtotal < k and end < n:
-            subtotal += sequence[end]
-            end += 1
+        left = 0
+        right = len(sequence)-i
         
-        if subtotal == k:
-            answer.append([start,end-1])
+        while left < right:
+            mid = (left + right) // 2
+            if prefix_sum[mid+i] - prefix_sum[mid] >= k:
+                right = mid
+            else:
+                left = mid + 1
+                
         
-        subtotal -= sequence[start]
+        if prefix_sum[left+i] - prefix_sum[left] == k:
+            return [left,left+i-1]
+            
     
-    answer.sort(key=lambda x:(x[1]-x[0],x[0]))
     
-    return answer[0]
+    return answer
