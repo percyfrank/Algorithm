@@ -1,6 +1,16 @@
 def solution(m, musicinfos):
+    
+    def convert(music):
+        music = music.replace('C#', 'c')
+        music = music.replace('D#', 'd')
+        music = music.replace('F#', 'f')
+        music = music.replace('G#', 'g')
+        music = music.replace('A#', 'a')
+        music = music.replace('B#', 'b')
+        return music
+    
     answer = []
-    m = m.replace('A#','H').replace('C#','I').replace('D#','J').replace('E#','K').replace('F#','L').replace('G#','M').replace('B#','N')
+    m = convert(m)
     
     for musicinfo in musicinfos:
         start, end, title, melody = musicinfo.split(",")
@@ -8,7 +18,7 @@ def solution(m, musicinfos):
         end = int(end[:2]) * 60 + int(end[3:])
         play_time = end-start
         
-        melody = melody.replace('A#','H').replace('C#','I').replace('D#','J').replace('E#','K').replace('F#','L').replace('G#','M').replace('B#','N')
+        melody = convert(melody)
 
         if play_time <= len(melody):
             melody = melody[:play_time]
@@ -18,7 +28,7 @@ def solution(m, musicinfos):
         print(m, melody)
         
         # 음악 제목 찾기
-        if melody.find(m) != -1:
+        if m in melody:
             answer.append([title,play_time])            
     
     answer.sort(key=lambda x:(-x[1], x[0]))
