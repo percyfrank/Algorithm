@@ -10,24 +10,20 @@ def solution(arrayA, arrayB):
     for i in arrayA:
         a = gcd(a,i)
     
-    flag = True
     for i in arrayB:
         if i % a == 0:
-            flag = False
             break
-    if flag:
+    else:
         answer = max(answer,a)
     
     b = arrayB[0]
     for i in arrayB:
         b = gcd(b,i)
     
-    flag = True
     for i in arrayA:
         if i % b == 0:
-            flag = False
             break
-    if flag:
+    else:
         answer = max(answer,b)
     
     return answer
