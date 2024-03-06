@@ -11,10 +11,8 @@ def solution(board):
             y += dy[dir]
             if not is_range(x,y) or board[x][y] == "D":
                 break
-        x -= dx[dir]
-        y -= dy[dir]
         
-        return x,y
+        return x - dx[dir], y - dy[dir]
     
     def bfs(x,y,dis):
         q = deque()
@@ -22,14 +20,14 @@ def solution(board):
         
         while q:
             x,y,dis = q.popleft()
+            if board[x][y] == "G":
+                return dis
             for i in range(4):
                 nx,ny = move(x,y,i)
                 if (nx,ny) not in visited:
                     visited.add((nx,ny))
                     q.append((nx,ny,dis+1))
-                if board[nx][ny] == "G":
-                    return dis+1
-    
+
         return -1
                 
     answer = 0
@@ -40,4 +38,7 @@ def solution(board):
     for i in range(n):
         for j in range(m):
             if board[i][j] == "R":
-                return(bfs(i,j,0))
+                answer = bfs(i,j,0)
+                
+    return answer
+    
