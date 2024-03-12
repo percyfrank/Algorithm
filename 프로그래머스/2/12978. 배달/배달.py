@@ -1,30 +1,37 @@
-import heapq
-
 def solution(N, road, K):
+
+    def get_smallest_node():
+        min_val = float('inf')
+        idx = 0
+        for i in range(1,N+1):
+            if distance[i] < min_val and not visited[i]:
+                min_val = distance[i]
+                idx = i
+        return idx
     
     def dijkstra(start):
-
-        q = []
-        heapq.heappush(q, (0,start))
         distance[start] = 0
-
-        while q:
-            dist, now = heapq.heappop(q)
-
-            if distance[now] < dist:
-                continue
-
-            for i in maps[now]:
-                if dist+i[1] < distance[i[0]]:
-                    distance[i[0]] = dist + i[1]
-                    heapq.heappush(q,(dist+i[1],i[0]))
-
-    distance = [float('inf')] * (N+1)         
-    maps = [[] for _ in range(N+1)]
+        visited[start] = True
+        
+        for k,v in maps[start].items():
+            distance[k] = v
+            
+        for i in range(N-1):
+            now = get_smallest_node()
+            visited[now] = True
+            
+            for node,dist in maps[now].items():
+                if distance[now] + dist < distance[node]:
+                    distance[node] = distance[now] + dist
+                            
+    visited = [False] * (N+1)
+    distance = [float('inf')] * (N+1)            
+    maps = [{} for _ in range(N+1)]
     for a,b,cost in road:
-        maps[a].append((b,cost))
-        maps[b].append((a,cost))
-    
+        if b not in maps[a] or maps[a][b] > cost:
+            maps[a][b] = cost
+            maps[b][a] = cost
+            
     dijkstra(1)
     
     answer = 0
