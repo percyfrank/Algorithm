@@ -2,7 +2,7 @@ import heapq
 import sys
 
 
-def dijkstra(start):
+def dijkstra(start,graph):
     times = [float('inf')] * (N + 1)
     q = []
     heapq.heappush(q, (0, start))
@@ -25,13 +25,15 @@ input = sys.stdin.readline
 
 N, M, X = map(int, input().split())
 graph = [{} for _ in range(N + 1)]
+reverse_graph = [{} for _ in range(N + 1)]
 for _ in range(M):
     u, v, time = map(int, input().split())
     graph[u][v] = time
+    reverse_graph[v][u] = time
 
-tmp = dijkstra(X)
+toX = dijkstra(X,graph)
+fromX = dijkstra(X,reverse_graph)
 answer = 0
-for i in range(1, N + 1):
-    tmp[i] += dijkstra(i)[X]
-    answer = max(answer, tmp[i])
+for i in range(1,N+1):
+    answer = max(answer,toX[i]+fromX[i])
 print(answer)
