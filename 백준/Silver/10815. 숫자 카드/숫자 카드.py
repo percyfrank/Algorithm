@@ -1,3 +1,6 @@
+import sys
+input = sys.stdin.readline
+
 def find_number(num,arr):
     start = 0
     end = len(arr)-1
@@ -13,15 +16,10 @@ def find_number(num,arr):
 
     return False
 
-
 n = int(input())
 arr = list(map(int,input().split()))
 arr.sort()
 m = int(input())
 cards = list(map(int,input().split()))
 
-for card in cards:
-    if find_number(card,arr):
-        print(1,end=" ")
-    else:
-        print(0,end=" ")
+print(" ".join(["1" if find_number(card,arr) else "0" for card in cards]))
