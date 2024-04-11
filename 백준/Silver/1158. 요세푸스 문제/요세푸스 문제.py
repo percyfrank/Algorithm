@@ -1,12 +1,12 @@
-from collections import deque
-
 n,k = map(int,input().split())
-q = deque([i for i in range(1,n+1)])
-
+q = [i for i in range(1,n+1)]
 arr = []
-while q:
-    for _ in range(k-1):
-        q.append(q.popleft())
-    arr.append(q.popleft())
+idx = 0
 
-print(str(arr).replace("[", "<").replace("]", ">"))
+while q:
+    idx += k-1
+    if idx >= len(q):
+        idx %= len(q)
+    arr.append(str(q.pop(idx)))
+
+print("<" + ", ".join(arr) + ">")
