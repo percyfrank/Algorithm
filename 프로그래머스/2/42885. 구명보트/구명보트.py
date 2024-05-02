@@ -7,9 +7,8 @@ def solution(people, limit):
 
     while q:
         if len(q) == 1:
-            q.pop()
             answer += 1
-            continue
+            break
         if q[0] + q[-1] > limit:
             q.pop()
         else:
