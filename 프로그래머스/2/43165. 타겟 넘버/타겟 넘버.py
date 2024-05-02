@@ -1,7 +1,18 @@
-from itertools import product
-
 def solution(numbers, target):
     
-    l = [(x, -x) for x in numbers]
-    s = list(map(sum, product(*l)))
-    return s.count(target)
+    
+    def dfs(idx,total):
+        nonlocal answer
+        
+        if idx == len(numbers):
+            if total == target:
+                answer += 1
+            return
+        
+        dfs(idx+1,total+numbers[idx])
+        dfs(idx+1,total-numbers[idx])
+            
+    answer = 0
+    dfs(0,0)
+    
+    return answer
