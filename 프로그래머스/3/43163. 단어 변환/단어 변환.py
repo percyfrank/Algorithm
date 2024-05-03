@@ -1,29 +1,32 @@
+from collections import deque
+
 def solution(begin, target, words):
         
     def compare(a,b):
         
-        cnt = 0   
+        cnt = 0      
         for i in range(len(begin)):
             if a[i] != b[i]:
                 cnt += 1
         
         return True if cnt == 1 else False
     
-    def dfs(word,cnt):
-            
-        if word == target:
-            cnt_list.append(cnt)
-            return
+    def bfs(word,cnt):
         
-        for i in range(len(words)):
-            if not visited[i] and compare(word,words[i]):
-                visited[i] = True
-                dfs(words[i],cnt+1)
-                visited[i] = False
+        q = deque()
+        q.append((word,cnt))
         
-
-    visited = [False] * len(words)
-    cnt_list = []
-    dfs(begin,0)
+        while q:
+            word,cnt = q.popleft()
+            if word == target:
+                return cnt
+            for i in range(len(words)):
+                if not visited[i] and compare(word,words[i]):
+                    q.append((words[i],cnt+1))
+                    visited[i] = True
         
-    return min(cnt_list) if cnt_list else 0
+    visited = [False] * len(words)            
+    if target not in words:
+        return 0
+    
+    return bfs(begin,0)
