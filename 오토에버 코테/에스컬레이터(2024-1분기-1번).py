@@ -2,20 +2,40 @@
 import time
 n = int(input())
 escalator = [list(map(int, input().split(" "))) for _ in range(n)]
-
 start_time = time.perf_counter()
 
-dp = [[float('inf')] * 3 for _ in range(n)]
+##########################################################################################
+# 풀이 1
+# dp = [[float('inf')] * 3 for _ in range(n)]
+# for i in range(len(escalator[0])):
+#     if escalator[0][i] == 0:
+#         dp[0][i] = abs(i-1)
+#
+# for i in range(1,n):
+#     for j in range(3):
+#         if escalator[i][j] == 0:
+#             dp[i][j] = min(dp[i-1][0]+abs(j-0), dp[i-1][1]+abs(j-1), dp[i-1][2]+abs(j-2))
+#
+# print(min(dp[n-1]))
+##########################################################################################
+
+##########################################################################################
+# 풀이 2
 for i in range(len(escalator[0])):
     if escalator[0][i] == 0:
-        dp[0][i] = abs(i-1)
+        escalator[0][i] = abs(i-1)
+    else:
+        escalator[0][i] = float('inf')
 
-for i in range(1,n):
+for i in range(1, n):
     for j in range(3):
         if escalator[i][j] == 0:
-            dp[i][j] = min(dp[i-1][0]+abs(j-0), dp[i-1][1]+abs(j-1), dp[i-1][2]+abs(j-2))
+            escalator[i][j] = min(escalator[i-1][0]+abs(j-0), escalator[i-1][1]+abs(j-1), escalator[i-1][2]+abs(j-2))
+        else:
+            escalator[i][j] = float('inf')
 
-print(min(dp[n-1]))
+print(min(escalator[n-1]))
+##########################################################################################
 
 end_time = time.perf_counter()
 print(f"time elapsed : {int(round((end_time - start_time) * 1000))}ms")
