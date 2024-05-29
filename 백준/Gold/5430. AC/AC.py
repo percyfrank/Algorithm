@@ -19,15 +19,12 @@ for _ in range(t):
     for i in range(len(p)):
         if p[i] == "R":
             dir = not dir
-        elif p[i] == "D":
-            if arr and dir:
-                arr.popleft()
-            elif arr and not dir:
-                arr.pop()
-            else:
+        else:
+            if not arr:
                 print("error")
                 errorFlag = False
                 break
+            arr.popleft() if dir else arr.pop()
 
     if errorFlag and dir:
         print('[' + ','.join(arr) + ']')
