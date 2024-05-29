@@ -11,8 +11,7 @@ for _ in range(t):
     if arr == "[]":
         arr = deque([])
     else:
-        arr = arr.replace("[", "").replace("]", "").split(",")
-        arr = deque(arr)
+        arr = deque(arr[1:-1].split(","))
 
     dir = True
     errorFlag = True
