@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 
 input = sys.stdin.readline
 
@@ -8,9 +9,10 @@ for _ in range(t):
     n = int(input())
     arr = input().rstrip()
     if arr == "[]":
-        arr = []
+        arr = deque([])
     else:
         arr = arr.replace("[", "").replace("]", "").split(",")
+        arr = deque(arr)
 
     dir = True
     errorFlag = True
@@ -19,7 +21,7 @@ for _ in range(t):
             dir = not dir
         elif p[i] == "D":
             if arr and dir:
-                arr.pop(0)
+                arr.popleft()
             elif arr and not dir:
                 arr.pop()
             else:
