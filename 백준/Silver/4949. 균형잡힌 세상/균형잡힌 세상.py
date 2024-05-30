@@ -14,20 +14,13 @@ while True:
             if stack and stack[-1] == '(':
                 stack.pop()
             else:
-                print("no")
                 flag = False
                 break
         elif s == ']':
             if stack and stack[-1] == '[':
                 stack.pop()
             else:
-                print("no")
                 flag = False
                 break
 
-    if not flag:
-        continue
-    if not stack and flag:
-        print("yes")
-    elif stack:
-        print("no")
+    print("yes") if not stack and flag else print("no")
