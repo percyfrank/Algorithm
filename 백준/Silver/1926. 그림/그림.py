@@ -10,7 +10,6 @@ def is_range(x, y):
 
 def bfs(x, y):
     q = deque()
-    visited[x][y] = True
     cnt = 1
     q.append((x, y))
 
@@ -38,6 +37,7 @@ res = []
 for i in range(n):
     for j in range(m):
         if pictures[i][j] == 1 and not visited[i][j]:
+            visited[i][j] = True
             bfs(i, j)
 
 print(len(res))
