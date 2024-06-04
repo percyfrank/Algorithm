@@ -10,8 +10,9 @@ def is_range(x, y):
 
 def bfs(x, y):
     q = deque()
-    cnt = 1
     q.append((x, y))
+    cnt = 1
+    pictures[x][y] = 0
 
     while q:
         x, y = q.popleft()
@@ -20,25 +21,23 @@ def bfs(x, y):
             ny = y + dy[i]
             if not is_range(nx, ny):
                 continue
-            if pictures[nx][ny] == 1 and not visited[nx][ny]:
-                visited[nx][ny] = True
-                cnt += 1
+            if pictures[nx][ny] == 1:
                 q.append((nx, ny))
+                pictures[nx][ny] = 0
+                cnt += 1
 
     res.append(cnt)
 
 
 n, m = map(int, input().split())
 pictures = [list(map(int, input().split())) for _ in range(n)]
-visited = [[False for _ in range(m)] for _ in range(n)]
 dx, dy = [1, 0, -1, 0], [0, 1, 0, -1]
 res = []
 
 for i in range(n):
     for j in range(m):
-        if pictures[i][j] == 1 and not visited[i][j]:
-            visited[i][j] = True
+        if pictures[i][j] == 1:
             bfs(i, j)
 
 print(len(res))
-print(max(res)) if res else print(0)
+print(max(res) if res else 0)
