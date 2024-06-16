@@ -3,9 +3,7 @@ from collections import deque
 
 input = sys.stdin.readline
 
-dx = [-1, -2, -2, -1, 1, 2, 2, 1]
-dy = [2, 1, -1, -2, -2, -1, 1, 2]
-
+dirs = [(-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)]
 
 def bfs(start, target, chess, l):
 
@@ -18,9 +16,9 @@ def bfs(start, target, chess, l):
         x, y, cnt = q.popleft()
         if (x, y) == target:
             return cnt
-        for i in range(8):
-            nx = x + dx[i]
-            ny = y + dy[i]
+        for (dx, dy) in dirs:
+            nx = x + dx
+            ny = y + dy
             if 0 <= nx < l and 0 <= ny < l:
                 if not chess[nx][ny]:
                     chess[nx][ny] = 1
