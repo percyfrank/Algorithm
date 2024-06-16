@@ -9,21 +9,22 @@ dy = [2, 1, -1, -2, -2, -1, 1, 2]
 
 def bfs(start, target, chess, l):
 
+    cnt = 0
     q = deque()
-    q.append(start)
+    q.append((start[0], start[1], cnt))
     chess[start[0]][start[1]] = 1
 
     while q:
-        x, y = q.popleft()
+        x, y, cnt = q.popleft()
         if (x, y) == target:
-            return chess[x][y]
+            return cnt
         for i in range(8):
             nx = x + dx[i]
             ny = y + dy[i]
             if 0 <= nx < l and 0 <= ny < l:
                 if not chess[nx][ny]:
-                    chess[nx][ny] = chess[x][y] + 1
-                    q.append((nx, ny))
+                    chess[nx][ny] = 1
+                    q.append((nx, ny, cnt+1))
 
 
 def main():
@@ -34,7 +35,7 @@ def main():
         start = tuple(map(int, input().split()))
         target = tuple(map(int, input().split()))
         cnt = bfs(start, target, chess, l)
-        print(cnt - 1)
+        print(cnt)
 
 
 if __name__ == "__main__":
