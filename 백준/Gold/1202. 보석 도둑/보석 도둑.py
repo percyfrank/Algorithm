@@ -5,7 +5,7 @@ input = sys.stdin.readline
 
 if __name__ == "__main__":
     n, k = map(int, input().split())
-    jewels = [list(map(int, input().split())) for _ in range(n)]
+    jewels = [tuple(map(int, input().split())) for _ in range(n)]
     jewels = deque(sorted(jewels))
     bags = [int(input()) for _ in range(k)]
     bags.sort()
