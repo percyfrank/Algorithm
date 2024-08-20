@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st;
 
@@ -17,17 +18,17 @@ public class Main {
             if (st.countTokens() == 1) {
                 String command = st.nextToken();
                 if (command.equals("front")) {
-                    System.out.println(list.isEmpty() ? -1 : list.peekFirst());
+                    sb.append(list.isEmpty() ? -1 : list.peekFirst()).append("\n");
                 } else if (command.equals("back")) {
-                    System.out.println(list.isEmpty() ? -1 : list.peekLast());
+                    sb.append(list.isEmpty() ? -1 : list.peekLast()).append("\n");
                 } else if (command.equals("empty")) {
-                    System.out.println(list.isEmpty() ? 1 : 0);
+                    sb.append(list.isEmpty() ? 1 : 0).append("\n");
                 } else if (command.equals("size")) {
-                    System.out.println(list.size());
+                    sb.append(list.size()).append("\n");
                 } else if (command.equals("pop_front")) {
-                    System.out.println(list.isEmpty() ? -1 : list.pollFirst());
+                    sb.append(list.isEmpty() ? -1 : list.pollFirst()).append("\n");
                 } else if (command.equals("pop_back")) {
-                    System.out.println(list.isEmpty() ? -1 : list.pollLast());
+                    sb.append(list.isEmpty() ? -1 : list.pollLast()).append("\n");
                 }
             } else {
                 String command = st.nextToken();
@@ -40,6 +41,8 @@ public class Main {
             }
 
         }
+
+        System.out.println(sb.toString());
 
     }
 }
