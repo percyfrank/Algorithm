@@ -10,35 +10,35 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
         String s = br.readLine();
-        Map<Character, Double> map = new HashMap<>();
+        String[] value = new String[n];
         for (int i = 0; i < n; i++) {
-            map.put((char) (65 + i), Double.parseDouble(br.readLine()));
+            value[i] = br.readLine();
         }
 
-        Deque<Double> q = new ArrayDeque();
+        Stack<Double> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if(Character.isAlphabetic(c)) {
-                q.addLast((Double)(map.get(c)));
+                stack.add(Double.parseDouble(value[c - 'A']));
             } else {
-                double b = q.pollLast();
-                double a = q.pollLast();
+                double b = stack.pop();
+                double a = stack.pop();
                 switch (c) {
                     case '*':
-                        q.addLast(a * b);
+                        stack.add(a * b);
                         break;
                     case '/':
-                        q.addLast(a / b);
+                        stack.add(a / b);
                         break;
                     case '+':
-                        q.addLast(a + b);
+                        stack.add(a + b);
                         break;
                     case '-':
-                        q.addLast(a - b);
+                        stack.add(a - b);
                         break;
                 }
             }
         }
-        System.out.printf("%.2f", q.pollFirst());
+        System.out.printf("%.2f", stack.pop());
     }
 }
