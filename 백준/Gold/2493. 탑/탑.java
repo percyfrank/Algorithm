@@ -29,10 +29,12 @@ public class Main {
             stack.add(new int[]{i, towers.get(i)});
         }
 
-
+        StringBuilder sb = new StringBuilder();
         for (int i = n-1; i >= 0; i--) {
-            System.out.print(ans[i] + " ");
+            sb.append(ans[i]).append(" ");
         }
+
+        System.out.println(sb.toString());
 
     }
 }
