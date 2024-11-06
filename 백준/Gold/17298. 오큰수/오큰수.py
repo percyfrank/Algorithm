@@ -1,11 +1,15 @@
+import sys
+input = sys.stdin.readline
+
 n = int(input())
-arr = list(map(int, input().split()))
+numbers = list(map(int,input().split()))
 
-result = [-1] * n
-stackIdx = []
-for i in range(len(arr)):
-    while stackIdx and arr[stackIdx[-1]] < arr[i]:
-        result[stackIdx.pop()] = arr[i]
-    stackIdx.append(i)
-
-print(*result)
+stack = []
+ans = [-1] * n
+for i, num in enumerate(numbers):
+    while stack and stack[-1][1] < num:
+        idx, prev = stack.pop()
+        ans[idx] = num
+    stack.append((i, num))
+    
+print(*ans)
