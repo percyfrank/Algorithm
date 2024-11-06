@@ -1,25 +1,28 @@
 def solution(bandage, health, attacks):
-
-    # 공격 마지막 시간, 붕대감기 연속 시간
-    curr = health
-    end_time, heal_time, attackIdx = attacks[len(attacks)-1][0], 0, 0
-
-    for curr_time in range(1,end_time+1):
-        # 공격받은 경우
-        if curr_time == attacks[attackIdx][0]:
-            heal_time = 0
-            curr -= attacks[attackIdx][1]
-            attackIdx += 1
-            if curr <= 0:
-                return -1
-        # 공격받지 않은 경우
-        else:
-            heal_time += 1
-            curr += bandage[1]
-            if heal_time == bandage[0]:
-                curr += bandage[2]
-                heal_time = 0
-            if curr > health:
-                curr = health
+    
+    last_time = attacks[-1][0]
+    idx, cnt = 0, 0    
+    curr_time = 0
+    curr_health = health
+    while curr_time <= last_time:
+        if curr_time == attacks[idx][0]:
+            cnt = 0
+            curr_health -= attacks[idx][1]
+            if curr_health <= 0:
+                curr_health = -1
+                break
+            curr_time += 1
+            idx += 1
+            continue
+        
+        cnt += 1
+        curr_health += bandage[1]                    
+        if cnt == bandage[0]:
+            cnt = 0
+            curr_health += bandage[2]            
+        if curr_health > health:
+            curr_health = health
                 
-    return curr
+        curr_time += 1
+        
+    return curr_health
