@@ -17,7 +17,6 @@ for _ in range(q):
 for i in range(1, n):
     cnt[i] += cnt[i - 1]
 
-print(cnt)
 for idx, c in enumerate(cnt):
     cnt[idx] = [idx, c]
 
