@@ -14,7 +14,7 @@ def find_possible_words(idx, word):
         find_possible_words(idx + 1, word + s[idx])
 
 
-s = int(input())
+s = input()
 n = int(input())
 words = [input() for _ in range(n)]
 possible_s = []
@@ -43,3 +43,30 @@ print(answer)
 # 3.대소문자 차이는 신경쓰지 않는다.
 # 4. 이외의 모든 경우는 일치하지 않는 것으로 본다.(띄어쓰기를 잘못한 경우 등)
 # s와 일치하면 1, 일치하지 않으면 0으로 표시.
+
+#### 입력
+# Nile River
+# 7
+# Nile River
+# NileRiver
+# Ni leRi ver
+# River Nile
+# Mississippi River
+# nile rivER
+# NILERIVER
+#
+#### 출력
+# [1,1,0,0,0,1,1]
+
+#### 입력
+# A B C
+# 6
+# x y z
+# A bc
+# ab C
+# aBc
+# abcd
+# A B C D
+#
+#### 출력
+# [0,1,1,1,0,0]
