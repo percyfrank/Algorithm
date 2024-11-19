@@ -20,8 +20,8 @@ public class Main {
         visited = new int[n][m];
         for (int i = 0; i < n; i++) {
             String tmp = br.readLine();
-            for (int j = 0; j < tmp.length(); j++) {
-                maze[i][j] = Integer.parseInt(String.valueOf(tmp.charAt(j)));
+            for (int j = 0; j < m; j++) {
+                maze[i][j] = tmp.charAt(j) - '0';
             }
         }
 
