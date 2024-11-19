@@ -8,14 +8,15 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
-        PriorityQueue<Value> q = new PriorityQueue<>();
+        List<Value> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            q.add(new Value(br.readLine()));
+            list.add(new Value(br.readLine()));
         }
 
+        Collections.sort(list);
         StringBuilder sb = new StringBuilder();
-        while (!q.isEmpty()) {
-            sb.append(q.poll().value).append("\n");
+        for (Value v : list) {
+            sb.append(v.value).append("\n");
         }
         System.out.println(sb.toString());
     }
@@ -33,24 +34,25 @@ class Value implements Comparable<Value> {
 
     public ArrayList<String> splitValue(String value) {
 
-        splittedValue = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
+        this.splittedValue = new ArrayList<>();
+        int idx = 0;
         for (int i = 0; i < value.length(); i++) {
             char c = value.charAt(i);
             if (Character.isDigit(c)) {
-                sb.append(c);
                 continue;
             } else {
-                if (sb.length() > 0) {
-                    splittedValue.add(sb.toString());
-                    sb = new StringBuilder();
+                if (idx < i) {
+                    splittedValue.add(value.substring(idx,i));
                 }
                 splittedValue.add(String.valueOf(c));
+                idx = i+1;
             }
         }
-        if (sb.length() > 0) {
-            splittedValue.add(sb.toString());
+        
+        if (idx < value.length()) {
+            splittedValue.add(value.substring(idx));    
         }
+        
         return splittedValue;
     }
 
