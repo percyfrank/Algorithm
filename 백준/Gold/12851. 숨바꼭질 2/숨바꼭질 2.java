@@ -4,11 +4,10 @@ import java.util.*;
 public class Main {
 
     static StringTokenizer st;
-    static int n, k;
+    static int n,k;
     static int[] visited = new int[100001];
-    static int MIN = Integer.MAX_VALUE;
-    static List<Integer> cnt = new ArrayList<>();
-
+    static int cnt;
+    static int min = Integer.MAX_VALUE;
 
     public static void main(String[] args) throws IOException {
 
@@ -16,49 +15,47 @@ public class Main {
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         k = Integer.parseInt(st.nextToken());
-
-        bfs(n, 0);
-        System.out.println(MIN);
-        int ans = 0;
-        for(int i=0; i<cnt.size(); i++) {
-            if (cnt.get(i) == MIN) {
-                ans += 1;
-            }
+        
+        if (n >= k) {
+            System.out.println(n-k);
+            System.out.println(1);
+        } else {
+            bfs(n);
+            System.out.println(min);
+            System.out.println(cnt);
         }
-        System.out.println(ans);
     }
-
-    public static void bfs(int pos, int time) {
-
-        Queue<Node> q = new LinkedList<>();
-        q.offer(new Node(pos, time));
-
+    
+    public static void bfs(int pos) {
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(pos);
+        visited[pos] = 1;
+        
         while (!q.isEmpty()) {
-            Node n = q.poll();
-            visited[n.pos] = 1;
-            if (n.pos == k) {
-                cnt.add(n.time);
-                MIN = Math.min(MIN, n.time);
+            int curr = q.poll();
+            if(min < visited[curr]) {
+                return;
             }
-
-            if (n.pos * 2 <= 100000 && visited[n.pos * 2] == 0) {
-                q.offer(new Node(n.pos * 2, n.time + 1));
-            }
-            if (n.pos + 1 <= 100000 && visited[n.pos + 1] == 0) {
-                q.offer(new Node(n.pos + 1, n.time + 1));
-            }
-            if (n.pos - 1 >= 0 && visited[n.pos - 1] == 0) {
-                q.offer(new Node(n.pos - 1, n.time + 1));
+            for(int i = 0; i < 3; i++) {
+                int next;
+                if (i == 0) next = curr + 1;
+                else if (i == 1) next = curr - 1;
+                else next = curr * 2;
+                
+                if (next < 0 || next > 100000) {
+                    continue;
+                }
+                if(next == k) {
+                    min = visited[curr];
+                    cnt += 1;
+                }
+                if(visited[next] == 0 || visited[next] == visited[curr] + 1) {
+                    visited[next] = visited[curr] + 1;
+                    q.offer(next);
+                }
+                
             }
         }
-    }
-}
-
-class Node {
-    int pos, time;
-
-    public Node(int pos, int time) {
-        this.pos = pos;
-        this.time = time;
     }
 }
